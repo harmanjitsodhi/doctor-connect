@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField';
-import styles from './styles';
+
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class RegistrationForm extends Component {
     this.state = {
       username: '',
       password: '',
+      userType: ''
 
     }
   }
@@ -28,6 +29,10 @@ class RegistrationForm extends Component {
               onChange={(e) => this.setState({username: e.target.value})}/><br/>
             <TextField type="password" label="Password"
               onChange={(e) => this.setState({password: e.target.value})}/><br/>
+              <Button
+              onClick={(e) => this.setState({userType: 'group'})}>I'm an an Org</Button><br/>
+            <Button
+              onClick={() => this.setState({userType: 'doctor'})}>I'm a Doctor</Button><br/>
 
             <Button onClick={() => this.handleRegistration()}>Register</Button><br/><br/>
             <a onClick={() => this.props.navPage({mode: "login"})}>Already have an account?</a>
