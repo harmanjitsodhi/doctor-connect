@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-var connect = process.env.MONGODB_URI;
+const connect = process.env.MONGODB_URI;
 mongoose.connect(connect);
 
-var doctorSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true
@@ -10,6 +10,16 @@ var doctorSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  usertype: {
+    type: String,
+    required: true
+  },
+
+const doctorSchema = new mongoose.Schema({
+  username: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
   },
   name: {
     type: String,
@@ -34,14 +44,10 @@ var doctorSchema = new mongoose.Schema({
 });
 
 
-var groupSchema = new mongoose.Schema({
+const groupSchema = new mongoose.Schema({
   username: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
   },
   name: {
     type: String,
@@ -57,7 +63,7 @@ var groupSchema = new mongoose.Schema({
   },
 });
 
-var eventSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -73,7 +79,7 @@ var eventSchema = new mongoose.Schema({
   InvitedDoctors: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Doctor'
-      
+
     }],
   eventHost: {
       type: mongoose.Schema.ObjectId,
@@ -82,10 +88,10 @@ var eventSchema = new mongoose.Schema({
 });
 
 
-
+const User = mongoose.model('User', userSchema);
 const Doctor = mongoose.model('Doctor', doctorSchema);
 const Group = mongoose.model('Group', groupSchema);
 const Event = mongoose.model('Event', eventSchema);
 
 
-module.exports = {Doctor, Group, Event};
+module.exports = {User, Doctor, Group, Event};
