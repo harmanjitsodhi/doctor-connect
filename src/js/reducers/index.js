@@ -8,7 +8,6 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "NAVIGATE_PAGES":
       return {...state, mode: action.page};
-
     default:
       return state;
   }

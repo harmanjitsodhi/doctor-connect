@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
-import {navPage} from './js/reducers/index';
+import {navPage} from './js/actions/index';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import Button from '@material-ui/core/Button';
@@ -23,11 +23,11 @@ class App extends Component {
   //   })
   // }
 
-  let App = ({navToPage, page})
 
+render() {
   let page;
-      if(this.state.mode === "login") screen = <LoginForm app={this}/>
-      else if(this.state.mode === "registration") screen = <RegistrationForm app={this}/>
+      if(this.props.mode === "login") page = <LoginForm app={this}/>
+      else if(this.props.mode === "registration") page = <RegistrationForm app={this}/>
       // else if(this.state.mode === "teacherDashboard") screen = <TeacherDashboard app={this}/>
       // else if(this.state.mode === "studentDashboard") screen = <StudentDashboard app={this}/>
       // else if(this.state.mode === "newQuiz") screen = <NewQuiz app={this}/>
@@ -35,9 +35,9 @@ class App extends Component {
       else  page =
       <div>
         <p> Get Started!</p>
-        <Button style={styles.btnForDefaultPage}
+        <Button
                 onClick={() => this.props.navToPage('login')}>Login</Button>
-        <Button style={styles.btnForDefaultPage}
+        <Button
                 onClick={() => this.props.navToPage('registration')}>Register</Button>
       </div>
 
@@ -55,34 +55,31 @@ class App extends Component {
 
 
       // <div className="App">
-{/* <form>
-<input type="text" value={this.state.username} placeholder="username"
-onChange={(event) => this.setState({username: event.target.value})}/>
-<input type="password" value={this.state.password} placeholder="password"
-onChange={(event) => this.setState({password: event.target.value})}/>
-<input type="submit" value="submit"
-onClick={(event) => this.submitContact(event, {username: this.state.username, password: this.state.password})}/>
-</form> */}
+// {/* <form>
+// <input type="text" value={this.state.username} placeholder="username"
+// onChange={(event) => this.setState({username: event.target.value})}/>
+// <input type="password" value={this.state.password} placeholder="password"
+// onChange={(event) => this.setState({password: event.target.value})}/>
+// <input type="submit" value="submit"
+// onClick={(event) => this.submitContact(event, {username: this.state.username, password: this.state.password})}/>
+// </form> */}
 
       // </div>
     );
-
+}
 }
 
 const mapStateToProps = (state) => {
  return {
 
-   page: state.mode,
+   mode: state.mode,
  }
 };
 
 const mapDispatchToProps = (dispatch) => {
  return {
-   addToArray: (article) => {
-     dispatch(addArticle(article))
-   },
-   navToPage: (page) => {
-     dispatch(navPage(page))
+   navToPage: (mode) => {
+     dispatch(navPage(mode))
    },
  }
 }
