@@ -14,31 +14,37 @@ class RegistrationForm extends Component {
     this.state = {
       username: '',
       password: '',
-      userType: ''
     }
   }
 
-
+// const self = this;
     handleRegistration(event, username, password, userType) {
 
       event.preventDefault();
 
 
-      axios.post('/api/addUser', {username: username, password: password, userType: userType})
-      .then(function(response) {
-        console.log('success!!', response);
-      })
-      .then(this.props.navToPage('login'))
 
+      axios.post('/api/addUser', {username: username, password: password, userType: this.props.userType})
+      .then((response) => {
+        if (!response.data._id) {
+          alert ("Unsuccessful registration")
+          // this.props.navToPage('registration')
+        } else {
+            this.props.navToPage(this.props.userType)
+        }
+
+      })
 
     }
+
+
     //not sure if this.props.navToPage will work- can a component rendered inside of connected one
 
     // console.log("mode from props ", this.props.mode)
 
 
   render() {
-    
+
     return (
       <div >
         <Paper>
@@ -50,14 +56,13 @@ class RegistrationForm extends Component {
               onChange={(e) => this.setState({password: e.target.value})}/>
               <br/>
               <Button
-              onClick={(e) => this.setState({userType: 'group'})}>I'm an an Org</Button><br/>
+              onClick={() => this.props.setUserType('group')}>I'm an an Org</Button><br/>
             <Button
-              onClick={() => this.setState({userType: 'doctor'})}>I'm a Doctor</Button><br/>
-
+              onClick={() => this.props.setUserType('doctor')}>I'm a Doctor</Button><br/>
             <Button onClick={(event) =>
-              this.handleRegistration(event, this.state.username, this.state.password, this.state.userType)}>
+              this.handleRegistration(event, this.state.username, this.state.password, this.props.userType)}>
               Register</Button><br/>
-            <a onClick={() => this.props.navPage({mode: "login"})}>Already have an account?</a>
+            <Button onClick={() => this.props.navToPage('login')}>Already have an account?</Button>
           </form>
           </Paper>
       </div>
@@ -68,6 +73,7 @@ class RegistrationForm extends Component {
 const mapStateToProps = (state) => {
  return {
    mode: state.mode,
+   userType: state.userType,
  }
 };
 
@@ -76,6 +82,9 @@ const mapDispatchToProps = (dispatch) => {
    navToPage: (mode) => {
      dispatch(navPage(mode))
    },
+   setUserType: (userType) => {
+     dispatch({type: 'SET_USERTYPE', userType: userType})
+   }
  }
 }
 

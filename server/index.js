@@ -58,23 +58,6 @@ app.use(passport.session());
 
 // app.use('/', routes);
 
-app.post('/api/addContact', function(req,res) {
-
-  const newContact = new User({
-    username: req.body.username,
-    password: req.body.password
-  })
-
-  newContact.save()
-    .then(response => {
-      console.log("aded new contact successfuly")
-      res.send(response)
-    }).catch(err => {
-      console.log("error didnt save")
-      res.send(err)
-    })
-})
-
 app.post('/api/addUser', function(req,res) {
 
   console.log("in app.post username:" + req.body.username);
@@ -82,7 +65,7 @@ app.post('/api/addUser', function(req,res) {
   const newUser = new User({
     username: req.body.username,
     password: req.body.password,
-    usertype: req.body.userType,
+    userType: req.body.userType,
   })
 
   newUser.save()

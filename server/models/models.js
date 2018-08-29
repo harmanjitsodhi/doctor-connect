@@ -11,14 +11,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  usertype: {
+  userType: {
     type: String,
     required: true
   },
 });
 
 const doctorSchema = new mongoose.Schema({
-  username: {
+  user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
@@ -46,7 +46,7 @@ const doctorSchema = new mongoose.Schema({
 
 
 const groupSchema = new mongoose.Schema({
-  username: {
+  user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },

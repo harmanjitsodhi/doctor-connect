@@ -6,6 +6,8 @@ import axios from "axios";
 import {navPage} from './js/actions/index';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
+import DoctorRegistrationForm from './components/DoctorRegistrationForm';
+import GroupRegistrationForm from './components/GroupRegistrationForm';
 import Button from '@material-ui/core/Button';
 
 
@@ -27,8 +29,8 @@ render() {
   let page;
       if(this.props.mode === "login") page = <LoginForm app={this}/>
       else if(this.props.mode === "registration") page = <RegistrationForm app={this}/>
-      // else if(this.state.mode === "teacherDashboard") screen = <TeacherDashboard app={this}/>
-      // else if(this.state.mode === "studentDashboard") screen = <StudentDashboard app={this}/>
+      else if(this.props.mode === "group") page = <GroupRegistrationForm app={this}/>
+      else if(this.props.mode === "doctor") page = <DoctorRegistrationForm app={this}/>
       // else if(this.state.mode === "newQuiz") screen = <NewQuiz app={this}/>
       // else if(this.state.mode === "questions") screen = <Questions app={this}/>
       else  page =
