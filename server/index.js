@@ -132,7 +132,43 @@ app.get('/api/current_user', (req, res) => {
   if(!req.user) {
     return res.send('Error you need to login');
   }
-  res.send(req.user);
+
+  if (req.user.userType === 'doctor') {
+    Doctor.findOne({user: req.user._id}, function (err, doctor) {
+      if (err) {
+        res.send({error: err})
+      } else if (!doctor) {
+        res.send("Error, doctor not found")
+      } else {
+        res.send(doctor)
+      }
+    })
+  }
+
+  if (req.user.userType === 'group') {
+    Group.findOne({user: req.user._id}, function (err, group) {
+      if (err) {
+        res.send({error: err})
+      } else if (!group) {
+        res.send("Error, group not found")
+      } else {
+        res.send(group)
+      }
+    })
+  }
+
+  if (req.user.userType === 'patient') {
+    Group.findOne({user: req.user._id}, function (err, group) {
+      if (err) {
+        res.send({error: err})
+      } else if (!group) {
+        res.send("Error, group not found")
+      } else {
+        res.send(group)
+      }
+    })
+  }
+
 })
 
 app.get('/api/failed', (req, res) => {

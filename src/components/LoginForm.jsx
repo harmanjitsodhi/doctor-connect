@@ -20,7 +20,7 @@ class LoginForm extends Component {
     console.log('my username:', username, "my password:", password);
     axios.post('/api/login', {username, password})
     .then(function(response) {
-      console.log('successful login!!', response);
+      this.props.setProfile(response.data)
     })
   }
 
@@ -51,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
    navToPage: (mode) => {
      dispatch(navPage(mode))
    },
+   setProfile: (profile) => {
+     dispatch({type: 'SET_PROFILE', profile: profile})
+   }
  }
 }
 
