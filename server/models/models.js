@@ -62,6 +62,10 @@ const groupSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // isGroup: {
+  //   type: Boolean,
+  //   required: true
+  // }
 });
 
 const eventSchema = new mongoose.Schema({
