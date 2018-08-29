@@ -9,7 +9,6 @@ import RegistrationForm from './components/RegistrationForm';
 import Button from '@material-ui/core/Button';
 
 
-
 class App extends Component {
 
 
@@ -49,11 +48,6 @@ render() {
       </div>
 
 
-
-
-
-
-
       // <div className="App">
 // {/* <form>
 // <input type="text" value={this.state.username} placeholder="username"
@@ -71,7 +65,6 @@ render() {
 
 const mapStateToProps = (state) => {
  return {
-
    mode: state.mode,
  }
 };
@@ -82,7 +75,7 @@ const mapDispatchToProps = (dispatch) => {
      dispatch(navPage(mode))
    },
  }
-}
+};
 
 App = connect(mapStateToProps, mapDispatchToProps)(App);
 

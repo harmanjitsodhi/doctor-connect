@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const connect = process.env.MONGODB_URI;
 mongoose.connect(connect);
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true
@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+});
 
 const doctorSchema = new mongoose.Schema({
   username: {

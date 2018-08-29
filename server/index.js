@@ -21,16 +21,6 @@ app.use(bodyParser.json());
 
 app.use(session({secret: secret}));
 
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
 passport.use(new LocalStrategy(function(username, password, done) {
   // Find the user with the given username
   User.findOne({ username: username }, function (err, user) {
@@ -53,39 +43,86 @@ passport.use(new LocalStrategy(function(username, password, done) {
   });
 }));
 
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', auth(passport));
-app.use('/', routes);
+// app.use('/', routes);
 
+app.post('/api/addContact', function(req,res) {
 
+  const newContact = new User({
+    username: req.body.username,
+    password: req.body.password
+  })
 
-// app.post('/api/addContact', function(req,res) {
-//
-//   const newContact = new User({
-//     username: req.body.username,
-//     password: req.body.password
-//   })
-//
-//   newContact.save()
-//     .then(response => {
-//       console.log("aded new contact successfuly")
-//       res.send(response)
-//     }).catch(err => {
-//       console.log("error didnt save")
-//       res.send(err)
-//     })
-// })
+  newContact.save()
+    .then(response => {
+      console.log("aded new contact successfuly")
+      res.send(response)
+    }).catch(err => {
+      console.log("error didnt save")
+      res.send(err)
+    })
+})
 
+app.post('/api/addUser', function(req,res) {
 
-app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/login');
+  console.log("in app.post username:" + req.body.username);
+
+  const newUser = new User({
+    username: req.body.username,
+    password: req.body.password,
+    usertype: req.body.userType,
+  })
+
+  newUser.save()
+    .then(response => {
+      console.log("aded new contact successfuly")
+      res.send(response)
+    }).catch(err => {
+      console.log("error didnt save")
+      res.send(err)
+    })
 });
 
+app.post('/api/login', passport.authenticate('local', {
+  successRedirect:'/api/current_user',
+  failureRedirect:'/api/failed'
+}));
 
-app.listen(process.env.PORT || 1337);
+
+
+app.get('/api/logout', function(req, res) {
+    req.logout();
+    res.redirect('/api/login');
+});
+
+app.get('/api/current_user', (req, res) => {
+  if(!req.user) {
+    return res.send('Error you need to login');
+  }
+
+  res.send(req.user);
+})
+
+app.get('/api/failed', (req, res) => {
+
+  res.status(401).send('Error bad pass');
+
+})
+
+
+app.listen( process.env.PORT ||1337);
 
 
 module.exports = app;
