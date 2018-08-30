@@ -127,9 +127,20 @@ let specialties = [
 
 let languages = ["spanish", "english", "mandarin"];
 
+let groupInterests = [
+"Research",
+"Fundraising",
+"Health-Clinics",
+"Informational",
+"Cancer",
+"Castleman Disease",
+"Alzheimer's",
+"Patient"
+];
+
 
 // export default {specialties, languages};
-module.exports = {specialties, languages};
+module.exports = {specialties, languages, groupInterests};
 
 
 // module.exports = {User, Doctor, Group, Event};
