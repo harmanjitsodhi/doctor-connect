@@ -169,14 +169,41 @@ app.get('/api/current_user', (req, res) => {
     })
   }
 
-})
+});
+
+app.post('/api/addEvent', (req, res) => {
+  const newEvent = new Event({
+    //don't forgeet to populate user id correctly
+    title: req.body.title,
+    eventDescription: req.body.eventDescription,
+    location: req.body.location,
+    eventHost: req.body.eventHost,
+  })
+
+  newEvent.save()
+    .then(response => {
+      console.log("added new group successfuly")
+      res.send(response)
+    }).catch(err => {
+      console.log("error didnt save")
+      res.send(err)
+    })
+});
+
+app.post('/api/inviteDoctor', (req, res) => {
+  Event.findOneAndUpdate({_id: req.body._id},
+    {invitedDoctors: event.invitedDoctors.push(req.body.invitedDoctorId)})
+    .exec()
+    .then(res.send(event))
+});
+
 
 app.get('/api/failed', (req, res) => {
   res.status(401).send('Error bad pass');
 })
 
 
-app.listen( process.env.PORT ||1337);
+app.listen(process.env.PORT ||1337);
 
 
 module.exports = app;
