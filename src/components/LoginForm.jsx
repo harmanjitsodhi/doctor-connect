@@ -20,7 +20,15 @@ class LoginForm extends Component {
     console.log('my username:', username, "my password:", password);
     axios.post('/api/login', {username, password})
     .then(function(response) {
-      this.props.setProfile(response.data)
+      this.props.setProfile(response.data.profile)
+
+      if (response.data.userType === 'doctor') {
+        this.props.navToPage('doctorPortal')
+      }
+
+      if (response.data.userType === 'group') {
+        this.props.navToPage('groupPortal')
+      }
     })
   }
 

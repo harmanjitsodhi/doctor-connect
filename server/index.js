@@ -140,7 +140,7 @@ app.get('/api/current_user', (req, res) => {
       } else if (!doctor) {
         res.send("Error, doctor not found")
       } else {
-        res.send(doctor)
+        res.send({userType: 'doctor', profile: doctor})
       }
     })
   }
@@ -152,7 +152,7 @@ app.get('/api/current_user', (req, res) => {
       } else if (!group) {
         res.send("Error, group not found")
       } else {
-        res.send(group)
+        res.send({userType: 'group', profile: group})
       }
     })
   }
@@ -164,7 +164,7 @@ app.get('/api/current_user', (req, res) => {
       } else if (!group) {
         res.send("Error, group not found")
       } else {
-        res.send(group)
+        res.send({userType: 'group', profile: group})
       }
     })
   }
