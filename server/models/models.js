@@ -38,10 +38,19 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  following: [{
+    type: String,
+  }],
   email: {
     type: String,
     required: true
   },
+  newsfeed: [{
+    type: String
+  }],
+  subscribedEvents: [{
+    type: String
+  }],
 });
 
 
@@ -58,14 +67,29 @@ const groupSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  interest: [{
+    type: String,
+    required: true,
+  }],
   email: {
     type: String,
-    
   },
+  following: [{
+    type: String,
+  }],
+  followers: [{
+    type: String,
+  }],
   isGroup: {
     type: Boolean,
     required: true
-  }
+  },
+  newsfeed: [{
+    type: String
+  }],
+  subscribedEvents: [{
+    type: String
+  }],
 });
 
 const eventSchema = new mongoose.Schema({
@@ -81,14 +105,14 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  InvitedDoctors: [{
+  invitedDoctors: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Doctor'
-
     }],
   eventHost: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Group'
+      ref: 'Group',
+      required: true
     },
 });
 
