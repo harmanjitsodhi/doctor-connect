@@ -107,7 +107,8 @@ const eventSchema = new mongoose.Schema({
   },
   invitedDoctors: [{
       type: mongoose.Schema.ObjectId,
-      ref: 'Doctor'
+      ref: 'Doctor',
+      required: false
     }],
   eventHost: {
       type: mongoose.Schema.ObjectId,

@@ -16,6 +16,7 @@ const models = require('./models/models');
 const User = models.User;
 const Doctor = models.Doctor;
 const Group = models.Group;
+const Event = models.Event;
 
 
 app.use(express.static(path.join(__dirname, 'build')));

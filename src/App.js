@@ -10,6 +10,8 @@ import DoctorRegistrationForm from './components/DoctorRegistrationForm';
 import GroupRegistrationForm from './components/GroupRegistrationForm';
 import PatientRegistrationForm from './components/PatientRegistrationForm';
 import DoctorPortal from './components/DoctorPortal';
+import CreateEventPage from './components/CreateEventPage';
+import MyEventsPage from './components/MyEventsPage';
 import GroupPortal from './components/GroupPortal';
 import Button from '@material-ui/core/Button';
 
@@ -34,10 +36,12 @@ render() {
       if(this.props.mode === "login") page = <LoginForm app={this}/>
       else if(this.props.mode === "registration") page = <RegistrationForm app={this}/>
       else if(this.props.mode === "group") page = <GroupRegistrationForm app={this}/>
+      else if(this.props.mode === "createEventPage") page = <CreateEventPage app={this}/>
+      else if(this.props.mode === "myEventsPage") page = <MyEventsPage app={this}/>
       else if(this.props.mode === "doctor") page = <DoctorRegistrationForm app={this}/>
-        else if(this.props.mode === "patient") page = <PatientRegistrationForm app={this}/>
-        else if(this.props.mode === "doctorPortal") page = <DoctorPortal app={this}/>
-        else if(this.props.mode === "groupPortal") page = <GroupPortal app={this}/>
+      else if(this.props.mode === "patient") page = <PatientRegistrationForm app={this}/>
+      else if(this.props.mode === "doctorPortal") page = <DoctorPortal app={this}/>
+      else if(this.props.mode === "groupPortal") page = <GroupPortal app={this}/>
       // else if(this.state.mode === "newQuiz") screen = <NewQuiz app={this}/>
       // else if(this.state.mode === "questions") screen = <Questions app={this}/>
       else  page =
