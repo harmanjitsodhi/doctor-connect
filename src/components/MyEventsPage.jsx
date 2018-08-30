@@ -15,7 +15,6 @@ class MyEventsPage extends Component {
     super(props);
     this.state = {
       eventsList: [],
-
     }
   }
 
@@ -25,15 +24,12 @@ class MyEventsPage extends Component {
 
     })
     .then((response) =>  {
-      console.log('response', response);
-
-      
-      this.setState({eventsList: response.data});
-
-
-
+      response.data.map(event => {
+        this.setState({eventsList: [...this.state.eventsList, event.title]})
+      })
     })
-      };
+  };
+
       handleGetEventInformation() {
         console.log("doesnt have afunction yet!")
       }
@@ -43,13 +39,13 @@ class MyEventsPage extends Component {
     return (
       <div>
         In my events listed page!
+        <div>
         {this.state.eventsList}
+      </div>
 
         {/* {this.state.eventsList.map(event =>
             <Button
               onClick={()=> this.handleGetEventInformation()}>{event.title}</Button>)}<br/> */}
-
-
 
       </div>
 
