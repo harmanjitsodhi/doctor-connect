@@ -2,6 +2,7 @@
 const initialState = {
   mode: '',
   userType: '',
+  userId: '',
   userProfile: {},
 };
 
@@ -9,9 +10,11 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "NAVIGATE_PAGES":
       return {...state, mode: action.page};
-      case "SET_USERTYPE":
+    case "SET_USERTYPE":
       return {...state, userType: action.userType};
-      case "SET_PROFILE":
+    case "SET_USERID":
+      return {...state, userId: action.userId};
+    case "SET_PROFILE":
       return {...state, userProfile: action.profile};
     default:
       return state;
