@@ -65,7 +65,7 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup, interest) {
 }
 
   render() {
-    console.log(this.state.interest);
+
     return (
       <div>
         This is my Group Registration form!!
