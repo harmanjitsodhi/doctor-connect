@@ -191,6 +191,12 @@ app.post('/api/addEvent', (req, res) => {
     })
 });
 
+app.post('/api/getEvents', (req, res) => {
+  Event.find({eventHost: req.body.eventHost})
+  .exec()
+  .then(res.send(events))
+})
+
 app.post('/api/inviteDoctor', (req, res) => {
   Event.findOneAndUpdate({_id: req.body._id},
     {invitedDoctors: event.invitedDoctors.push(req.body.invitedDoctorId)})
