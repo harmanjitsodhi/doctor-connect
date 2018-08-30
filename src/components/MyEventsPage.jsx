@@ -25,7 +25,7 @@ class MyEventsPage extends Component {
     })
     .then((response) =>  {
       response.data.map(event => {
-        this.setState({eventsList: [...this.state.eventsList, event.title]})
+        this.setState({eventsList: [...this.state.eventsList, event.title, event.eventDescription]})
       })
     })
   };
@@ -39,15 +39,17 @@ class MyEventsPage extends Component {
     return (
       <div>
         In my events listed page!
-        <div>
-        {this.state.eventsList}
-      </div>
 
-        {/* {this.state.eventsList.map(event =>
-            <Button
-              onClick={()=> this.handleGetEventInformation()}>{event.title}</Button>)}<br/> */}
-
+      <div>
+        {this.state.eventsList.map(event =>
+          <div>
+          {event}
+          <Button
+              onClick={()=> this.handleGetEventInformation()}>Invite Doctors</Button>
+          </div>
+        )}
       </div>
+    </div>
 
     );
   }
