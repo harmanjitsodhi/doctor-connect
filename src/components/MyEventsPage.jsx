@@ -6,12 +6,50 @@ import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
 
+
+
+
+
 class MyEventsPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      eventsList: [],
+
+    }
+  }
+
+  componentDidMount() {
+    axios.post('/api/getEvents',
+    {eventHost: this.props.userProfile._id,
+
+    })
+    .then((response) =>  {
+      console.log('response', response);
+
+      
+      this.setState({eventsList: response.data});
+
+
+
+    })
+      };
+      handleGetEventInformation() {
+        console.log("doesnt have afunction yet!")
+      }
+
 
   render() {
     return (
       <div>
         In my events listed page!
+        {this.state.eventsList}
+
+        {/* {this.state.eventsList.map(event =>
+            <Button
+              onClick={()=> this.handleGetEventInformation()}>{event.title}</Button>)}<br/> */}
+
+
 
       </div>
 

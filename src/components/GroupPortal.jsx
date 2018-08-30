@@ -7,6 +7,7 @@ import {navPage} from '../js/actions/index';
 
 class GroupPortal extends Component {
 
+
   render() {
     return (
       <div>
@@ -16,6 +17,7 @@ class GroupPortal extends Component {
 
 
         <Button onClick={() => this.props.navToPage('createEventPage')}>Create Event</Button>
+        <Button onClick={() => this.props.navToPage('myEventsPage')}>See my Events</Button>
       </p>
       </div>
 

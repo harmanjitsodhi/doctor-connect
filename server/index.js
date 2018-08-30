@@ -194,7 +194,10 @@ app.post('/api/addEvent', (req, res) => {
 app.post('/api/getEvents', (req, res) => {
   Event.find({eventHost: req.body.eventHost})
   .exec()
-  .then(res.send(events))
+  .then(response =>
+    {res.send(response)}
+
+  )
 })
 
 app.post('/api/inviteDoctor', (req, res) => {
