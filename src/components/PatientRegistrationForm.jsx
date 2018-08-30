@@ -5,6 +5,11 @@ import TextField from '@material-ui/core/TextField';
 import axios from "axios";
 import {navPage} from '../js/actions/index';
 import {connect} from 'react-redux';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import groupInterests from '../specialtiesSRC';
 
 class PatientRegistrationForm extends Component {
   constructor(props) {
@@ -12,13 +17,28 @@ class PatientRegistrationForm extends Component {
     this.state = {
       patientName: '',
       patientAbout: '',
+      open: false,
+      interest: [],
 
 
     }
   }
 
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
-handleCompletePatientProfile(event, user, name, about, isGroup) {
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
+
+  };
+
+
+handleCompletePatientProfile(event, user, name, about, isGroup, interest) {
 
   event.preventDefault();
 
@@ -29,6 +49,7 @@ handleCompletePatientProfile(event, user, name, about, isGroup) {
     name: this.state.patientName,
     about: this.state.patientAbout,
     email: this.state.patientEmail,
+    interest: this.state.interest,
     isGroup: false
   })
   .then((response) => {
@@ -56,6 +77,32 @@ handleCompletePatientProfile(event, user, name, about, isGroup) {
             <TextField style={{width: "80%"}} multiline rowsMax="50" type="text" label="A little about yourself!"
               onChange={(e) => this.setState({patientAbout: e.target.value})}/>
               <br/>
+              <form autoComplete="off">
+
+                <FormControl>
+                  <InputLabel htmlFor="interest-controlled-open-select">Interests</InputLabel>
+                  <Select multiple
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    onOpen={this.handleOpen}
+                    value={this.state.interest}
+                    onChange={this.handleChange}
+                    inputProps={{
+                      name: 'interest',
+                      id: 'interest-controlled-open-select',
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+
+                    {groupInterests.map((interest, index) => <MenuItem key={index} value={interest}>{interest}</MenuItem>)}
+
+
+                  </Select>
+                </FormControl>
+
+              </form>
 
             <Button onClick={(event) =>
               this.handleCompletePatientProfile(event)}>

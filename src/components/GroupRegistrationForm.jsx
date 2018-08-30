@@ -5,6 +5,11 @@ import TextField from '@material-ui/core/TextField';
 import axios from "axios";
 import {navPage} from '../js/actions/index';
 import {connect} from 'react-redux';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import groupInterests from '../specialtiesSRC';
 
 class GroupRegistrationForm extends Component {
   constructor(props) {
@@ -12,15 +17,30 @@ class GroupRegistrationForm extends Component {
     this.state = {
       orgName: '',
       orgAbout: '',
-      orgEmail: ''
+      orgEmail: '',
+      open: false,
+      interest: []
 
     }
   }
 
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
-handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+
+handleCompleteGroupProfile(event, user, name, about, email, isGroup, interest) {
 
   event.preventDefault();
+
 
 
 
@@ -29,6 +49,7 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
     name: this.state.orgName,
     about: this.state.orgAbout,
     email: this.state.orgEmail,
+    interest: this.state.interest,
     isGroup: true
   })
   .then((response) => {
@@ -44,6 +65,7 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
 }
 
   render() {
+    console.log(this.state.interest);
     return (
       <div>
         This is my Group Registration form!!
@@ -58,6 +80,33 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
               <TextField type="text" label="Enter Contact Email"
                 onChange={(e) => this.setState({orgEmail: e.target.value})}/>
                 <br/>
+
+                <form autoComplete="off">
+
+                  <FormControl>
+                    <InputLabel htmlFor="interest-controlled-open-select">Interests</InputLabel>
+                    <Select multiple
+                      open={this.state.open}
+                      onClose={this.handleClose}
+                      onOpen={this.handleOpen}
+                      value={this.state.interest}
+                      onChange={this.handleChange}
+                      inputProps={{
+                        name: 'interest',
+                        id: 'interest-controlled-open-select',
+                      }}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+
+                      {groupInterests.map((interest, index) => <MenuItem key={index} value={interest}>{interest}</MenuItem>)}
+
+
+                    </Select>
+                  </FormControl>
+
+                </form>
 
             <Button onClick={(event) =>
               this.handleCompleteGroupProfile(event)}>
