@@ -11,7 +11,7 @@ class DoctorPortal extends Component {
     return (
       <div>
         In Doctor Portal!
-        {this.userProfile.name}
+        {this.props.userProfile.name}
       </div>
     );
   }

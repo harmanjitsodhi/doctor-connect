@@ -11,7 +11,7 @@ class GroupPortal extends Component {
     return (
       <div>
         In Group Portal!
-        {this.userProfile.name}
+        {this.props.userProfile.name}
       </div>
     );
   }

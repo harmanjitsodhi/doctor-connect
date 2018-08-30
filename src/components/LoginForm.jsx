@@ -19,10 +19,12 @@ class LoginForm extends Component {
     event.preventDefault();
     console.log('my username:', username, "my password:", password);
     axios.post('/api/login', {username, password})
-    .then(function(response) {
+    .then((response) => {
+      console.log(response);
       this.props.setProfile(response.data.profile)
 
       if (response.data.userType === 'doctor') {
+
         this.props.navToPage('doctorPortal')
       }
 
