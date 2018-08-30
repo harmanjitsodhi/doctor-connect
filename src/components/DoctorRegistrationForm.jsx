@@ -6,7 +6,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import specialties from '../specialtiesSRC';
+import {specialties, languages} from '../specialtiesSRC';
+import axios from "axios";
+import {navPage} from '../js/actions/index';
+import {connect} from 'react-redux';
 
 class DoctorRegistrationForm extends Component {
   constructor(props) {
@@ -16,12 +19,13 @@ class DoctorRegistrationForm extends Component {
       occupation: '',
       doctorEmail: '',
       open: false,
+      languageOpen: false,
+      doctorLocation: '',
+      doctorLanguage: [],
 
     }
   }
-  handleCompleteProfile(event) {
-  console.log("doctor profile complete!");
-  }
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -33,8 +37,40 @@ class DoctorRegistrationForm extends Component {
   handleOpen = () => {
     this.setState({ open: true });
   };
+  handleLanguageClose = () => {
+    this.setState({ languageOpen: false });
+  };
+
+  handleLanguageOpen = () => {
+    this.setState({ languageOpen: true });
+  };
 
 
+
+
+
+  handleCompleteDoctorProfile(event,user, name, specialty, language, location,email) {
+
+    event.preventDefault();
+    axios.post('/api/addDoctor',
+    {user: this.props.userId,
+      name: this.state.doctorName,
+      specialty: this.state.occupation,
+      language: this.state.doctorLanguage,
+      location: this.state.doctorLocation,
+      email: this.state.doctorEmail
+    })
+    .then((response) => {
+      if (!response.data._id) {
+        alert ("Unable to Complete Profile")
+        // this.props.navToPage('registration')
+      } else {
+          this.props.navToPage('login')
+      }
+
+    })
+
+  }
 
 
   render() {
@@ -50,13 +86,15 @@ class DoctorRegistrationForm extends Component {
               <TextField type="text" label="Enter Contact Email"
                 onChange={(e) => this.setState({doctorEmail: e.target.value})}/>
                 <br/>
+                <TextField type="text" label="Zip Code"
+                  onChange={(e) => this.setState({doctorLocation: e.target.value})}/>
+                  <br/>
+
 
         <form autoComplete="off">
-       {/* <Button onClick={this.handleOpen}>
-         Open the select
-       </Button> */}
+
        <FormControl>
-         <InputLabel htmlFor="demo-controlled-open-select">Occupation</InputLabel>
+         <InputLabel htmlFor="occupation-controlled-open-select">Occupation</InputLabel>
          <Select
            open={this.state.open}
            onClose={this.handleClose}
@@ -78,9 +116,35 @@ class DoctorRegistrationForm extends Component {
          </Select>
        </FormControl>
      </form>
+     <form autoComplete="off">
+
+       <FormControl>
+         <InputLabel htmlFor="language-controlled-open-select">Languages</InputLabel>
+         <Select multiple
+           open={this.state.languageOpen}
+           onClose={this.handleLanguageClose}
+           onOpen={this.handleLanguageOpen}
+           value={this.state.doctorLanguage}
+           onChange={this.handleChange}
+           inputProps={{
+             name: 'doctorLanguage',
+             id: 'language-controlled-open-select',
+           }}
+         >
+           <MenuItem value="">
+             <em>None</em>
+           </MenuItem>
+
+           {languages.map((language, index) => <MenuItem key={index} value={language}>{language}</MenuItem>)}
+
+
+         </Select>
+       </FormControl>
+
+     </form>
 
             <Button onClick={(event) =>
-              this.handleCompleteProfile(event)}>
+              this.handleCompleteDoctorProfile(event)}>
               Complete Profile!</Button><br/>
 
           </form>
@@ -89,5 +153,23 @@ class DoctorRegistrationForm extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+ return {
+   mode: state.mode,
+   userId: state.userId
+ }
+};
+
+const mapDispatchToProps = (dispatch) => {
+ return {
+   navToPage: (mode) => {
+     dispatch(navPage(mode))
+   },
+   }
+ }
+
+
+DoctorRegistrationForm = connect(mapStateToProps, mapDispatchToProps)(DoctorRegistrationForm);
 
 export default DoctorRegistrationForm;

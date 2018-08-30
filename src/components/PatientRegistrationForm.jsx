@@ -6,19 +6,19 @@ import axios from "axios";
 import {navPage} from '../js/actions/index';
 import {connect} from 'react-redux';
 
-class GroupRegistrationForm extends Component {
+class PatientRegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orgName: '',
-      orgAbout: '',
-      orgEmail: ''
+      patientName: '',
+      patientAbout: '',
+
 
     }
   }
 
 
-handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
+handleCompletePatientProfile(event, user, name, about, isGroup) {
 
   event.preventDefault();
 
@@ -26,14 +26,14 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
 
   axios.post('/api/addGroup',
   {user: this.props.userId,
-    name: this.state.orgName,
-    about: this.state.orgAbout,
-    email: this.state.orgEmail,
-    isGroup: true
+    name: this.state.patientName,
+    about: this.state.patientAbout,
+    email: this.state.patientEmail,
+    isGroup: false
   })
   .then((response) => {
     if (!response.data._id) {
-      alert ("Unable to update Profile")
+      alert ("Unable to update profile ")
       // this.props.navToPage('registration')
     } else {
         this.props.navToPage('login')
@@ -43,24 +43,22 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup) {
 
 }
 
+
   render() {
     return (
       <div>
         This is my Group Registration form!!
         <Paper>
           <form>
-            <TextField type="text" label="Organization Name"
-              onChange={(e) => this.setState({orgName: e.target.value})}/>
+            <TextField type="text" label="Enter Your Name"
+              onChange={(e) => this.setState({patientName: e.target.value})}/>
               <br/>
-            <TextField style={{width: "80%"}} multiline rowsMax="50" type="text" label="About Your Organization"
-              onChange={(e) => this.setState({orgAbout: e.target.value})}/>
+            <TextField style={{width: "80%"}} multiline rowsMax="50" type="text" label="A little about yourself!"
+              onChange={(e) => this.setState({patientAbout: e.target.value})}/>
               <br/>
-              <TextField type="text" label="Enter Contact Email"
-                onChange={(e) => this.setState({orgEmail: e.target.value})}/>
-                <br/>
 
             <Button onClick={(event) =>
-              this.handleCompleteGroupProfile(event)}>
+              this.handleCompletePatientProfile(event)}>
               Complete Profile!</Button><br/>
 
           </form>
@@ -85,7 +83,6 @@ const mapDispatchToProps = (dispatch) => {
    }
  }
 
+PatientRegistrationForm = connect(mapStateToProps, mapDispatchToProps)(PatientRegistrationForm);
 
-GroupRegistrationForm = connect(mapStateToProps, mapDispatchToProps)(GroupRegistrationForm);
-
-export default GroupRegistrationForm;
+export default PatientRegistrationForm;

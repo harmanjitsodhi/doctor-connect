@@ -125,5 +125,11 @@ let specialties = [
 "Vascular Surgery"
 ];
 
+let languages = ["spanish", "english", "mandarin"];
 
-export default specialties;
+
+// export default {specialties, languages};
+module.exports = {specialties, languages};
+
+
+// module.exports = {User, Doctor, Group, Event};

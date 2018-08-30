@@ -28,8 +28,10 @@ class RegistrationForm extends Component {
       .then((response) => {
         if (!response.data._id) {
           alert ("Unsuccessful registration")
+
           // this.props.navToPage('registration')
         } else {
+            this.props.setUserId(response.data._id)
             this.props.navToPage(this.props.userType)
         }
 
@@ -59,6 +61,8 @@ class RegistrationForm extends Component {
               onClick={() => this.props.setUserType('group')}>I'm an an Org</Button><br/>
             <Button
               onClick={() => this.props.setUserType('doctor')}>I'm a Doctor</Button><br/>
+              <Button
+              onClick={() => this.props.setUserType('patient')}>I'm an independent</Button><br/>
             <Button onClick={(event) =>
               this.handleRegistration(event, this.state.username, this.state.password, this.props.userType)}>
               Register</Button><br/>
@@ -84,6 +88,9 @@ const mapDispatchToProps = (dispatch) => {
    },
    setUserType: (userType) => {
      dispatch({type: 'SET_USERTYPE', userType: userType})
+   },
+   setUserId: (userId) => {
+     dispatch({type: 'SET_USERID', userId: userId})
    }
  }
 }

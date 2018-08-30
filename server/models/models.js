@@ -60,12 +60,12 @@ const groupSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    
   },
-  // isGroup: {
-  //   type: Boolean,
-  //   required: true
-  // }
+  isGroup: {
+    type: Boolean,
+    required: true
+  }
 });
 
 const eventSchema = new mongoose.Schema({
