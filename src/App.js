@@ -11,7 +11,9 @@ import GroupRegistrationForm from './components/GroupRegistrationForm';
 import PatientRegistrationForm from './components/PatientRegistrationForm';
 import DoctorPortal from './components/DoctorPortal';
 import CreateEventPage from './components/CreateEventPage';
+import InviteDoctorPage from './components/InviteDoctorPage';
 import MyEventsPage from './components/MyEventsPage';
+import MyInvitesPage from './components/MyInvitesPage';
 import GroupPortal from './components/GroupPortal';
 import Button from '@material-ui/core/Button';
 
@@ -39,6 +41,8 @@ render() {
       else if(this.props.mode === "createEventPage") page = <CreateEventPage app={this}/>
       else if(this.props.mode === "myEventsPage") page = <MyEventsPage app={this}/>
       else if(this.props.mode === "doctor") page = <DoctorRegistrationForm app={this}/>
+      else if(this.props.mode === "inviteDoctorPage") page = <InviteDoctorPage app={this}/>
+        else if(this.props.mode === "myInvitesPage") page = <MyInvitesPage app={this}/>
       else if(this.props.mode === "patient") page = <PatientRegistrationForm app={this}/>
       else if(this.props.mode === "doctorPortal") page = <DoctorPortal app={this}/>
       else if(this.props.mode === "groupPortal") page = <GroupPortal app={this}/>

@@ -17,10 +17,9 @@ class LoginForm extends Component {
 
   handleLogin(event, username, password) {
     event.preventDefault();
-    console.log('my username:', username, "my password:", password);
     axios.post('/api/login', {username, password})
     .then((response) => {
-      console.log(response);
+      
       this.props.setProfile(response.data.profile)
 
       if (response.data.userType === 'doctor') {

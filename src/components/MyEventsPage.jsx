@@ -24,28 +24,37 @@ class MyEventsPage extends Component {
 
     })
     .then((response) =>  {
-      response.data.map(event => {
-        this.setState({eventsList: [...this.state.eventsList, event.title, event.eventDescription]})
+      response.data.map(myEvent => {
+        this.setState({eventsList: [...this.state.eventsList, myEvent]})
       })
     })
   };
 
-      handleGetEventInformation() {
-        console.log("doesnt have afunction yet!")
+      handleInviteDoctor(event, myEvent) {
+        event.preventDefault();
+
+          this.props.setEvent(myEvent);
+
+
+
+
+          this.props.navToPage('inviteDoctorPage');
+
       }
 
 
   render() {
+
     return (
       <div>
         In my events listed page!
 
       <div>
-        {this.state.eventsList.map(event =>
+        {this.state.eventsList.map(myEvent =>
           <div>
-          {event}
+          {myEvent.title}
           <Button
-              onClick={()=> this.handleGetEventInformation()}>Invite Doctors</Button>
+              onClick={(event)=> this.handleInviteDoctor(event, myEvent)}>Invite Doctors</Button>
           </div>
         )}
       </div>
@@ -59,6 +68,7 @@ const mapStateToProps = (state) => {
  return {
    mode: state.mode,
    userProfile: state.userProfile,
+   event: state.event,
  }
 };
 
@@ -67,6 +77,9 @@ const mapDispatchToProps = (dispatch) => {
    navToPage: (mode) => {
      dispatch(navPage(mode))
    },
+   setEvent: (myEvent) => {
+     dispatch({type: 'SET_EVENT', event: myEvent})
+   }
  }
 }
 

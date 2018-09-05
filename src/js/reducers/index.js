@@ -4,6 +4,7 @@ const initialState = {
   userType: '',
   userId: '',
   userProfile: {},
+  event: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -16,6 +17,8 @@ const rootReducer = (state = initialState, action) => {
       return {...state, userId: action.userId};
     case "SET_PROFILE":
       return {...state, userProfile: action.profile};
+      case "SET_EVENT":
+        return {...state, event: action.event};
     default:
       return state;
   }

@@ -138,9 +138,11 @@ let groupInterests = [
 "Patient"
 ];
 
+let filterByList= ["specialty", "language"];
+
 
 // export default {specialties, languages};
-module.exports = {specialties, languages, groupInterests};
+module.exports = {filterByList, specialties, languages, groupInterests};
 
 
 // module.exports = {User, Doctor, Group, Event};
