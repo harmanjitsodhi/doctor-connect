@@ -16,8 +16,7 @@ import MyEventsPage from './components/MyEventsPage';
 import MyInvitesPage from './components/MyInvitesPage';
 import GroupPortal from './components/GroupPortal';
 import Button from '@material-ui/core/Button';
-
-
+import {Healing} from "@material-ui/icons";
 
 class App extends Component {
 
@@ -50,7 +49,11 @@ render() {
       // else if(this.state.mode === "questions") screen = <Questions app={this}/>
       else  page =
       <div>
-        <p> Get Started!</p>
+        <img style={{height: "50px", width:"50px", padding: "10px"}}
+          src={"https://image.freepik.com/free-icon/stethoscope-medical-tool_318-61950.jpg"}/>
+        <h3> Welcome to Doctor Connect!</h3>
+        <p>This is an app to help patients, doctors, and organizations
+          to connect, plan events, and share information!</p>
         <Button
                 onClick={() => this.props.navToPage('login')}>Login</Button>
         <Button

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
 
+
 class DoctorPortal extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +41,6 @@ class DoctorPortal extends Component {
     <div>
       <Button
           onClick={()=> this.handleViewInvites()}>See Invites</Button>
-
     </div>
   </div>
     );

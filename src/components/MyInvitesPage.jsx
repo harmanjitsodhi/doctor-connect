@@ -9,18 +9,13 @@ import Select from '@material-ui/core/Select';
 import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
-
-
-
-
-
+import MapContainer from "../components/GoogleMap/MapContainer";
 
 class MyInvitesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inviteList: [],
-
     }
   }
 
@@ -62,6 +57,8 @@ handleAcceptInvite(event,invite) {
             {invite.title} {invite.eventDescription} {invite.location}
             <Button
                 onClick={(event)=> this.handleAcceptInvite(event,invite)}>Accept Invite</Button>
+{/* need to put events in here (are they stored in state?) */}
+                {/* <MapContainer events={}/> */}
             </div>
           )}
         </div>
