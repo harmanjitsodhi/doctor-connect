@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
+import GroupNavBar from './GroupNavBar';
 
 
 
@@ -46,7 +47,8 @@ class MyEventsPage extends Component {
   render() {
 
     return (
-      <div>
+      <div style={center}>
+          <GroupNavBar/>
         In my events listed page!
 
       <div>
@@ -62,6 +64,14 @@ class MyEventsPage extends Component {
 
     );
   }
+}
+const center = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+
+  width: "100%",
+  height: "100%",
 }
 
 const mapStateToProps = (state) => {

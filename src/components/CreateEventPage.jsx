@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
+import GroupNavBar from './GroupNavBar';
 
 class CreateEventPage extends Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class CreateEventPage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={center}>
+          <GroupNavBar/>
       <h1>
         In createEventPage Portal!
       </h1>
@@ -75,6 +77,14 @@ const mapDispatchToProps = (dispatch) => {
      dispatch(navPage(mode))
    },
  }
+}
+const center = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+
+  width: "100%",
+  height: "100%",
 }
 
 CreateEventPage = connect(mapStateToProps, mapDispatchToProps)(CreateEventPage);

@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
-
+import DoctorNavBar from './DoctorNavBar';
 
 class DoctorPortal extends Component {
   constructor(props) {
@@ -16,32 +16,22 @@ class DoctorPortal extends Component {
     }
   }
 
-  handleViewInvites() {
-    // axios.post('/api/getInvites',
-    // {docID: this.props.userProfile._id,
-    //
-    // })
-    // .then((response) =>  {
-    //   response.data.map(invite => {
-    //     this.setState({inviteList: [...this.state.inviteList, invite]})
-    //   })
-    // })
-    this.props.navToPage('myInvitesPage');
 
-  }
 
   render() {
 
     return (
-      <div>
+      <div style={center}>
+        <DoctorNavBar/>
+
+
+
       <div>
         In Doctor Portal!
         {this.props.userProfile.name}
       </div>
-    <div>
-      <Button
-          onClick={()=> this.handleViewInvites()}>See Invites</Button>
-    </div>
+      <div> HELLO </div>
+
   </div>
     );
   }
@@ -61,6 +51,18 @@ const mapDispatchToProps = (dispatch) => {
    },
  }
 }
+const center = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+
+  width: "100%",
+  height: "100%",
+}
+// const naveBarStyle={
+// background: "#eee",
+//   float: "left",
+// }
 
 DoctorPortal = connect(mapStateToProps, mapDispatchToProps)(DoctorPortal);
 

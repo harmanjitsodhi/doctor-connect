@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
 import MapContainer from "../components/GoogleMap/MapContainer";
+import DoctorNavBar from './DoctorNavBar';
 
 class MyInvitesPage extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ handleAcceptInvite(event,invite) {
     doctorID: doctorID,
   })
   .then(()=> {
+
   alert('invite accepted')
 })
 }
@@ -49,7 +51,8 @@ handleAcceptInvite(event,invite) {
     console.log(this.state.inviteList);
 
     return (
-      <div>
+      <div style={center}>
+          <DoctorNavBar/>
         In my invites page!
         <div>
           {this.state.inviteList.map(invite =>
@@ -81,6 +84,14 @@ const mapDispatchToProps = (dispatch) => {
      dispatch(navPage(mode))
    },
  }
+}
+const center = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+
+  width: "100%",
+  height: "100%",
 }
 
 MyInvitesPage = connect(mapStateToProps, mapDispatchToProps)(MyInvitesPage);
