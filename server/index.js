@@ -200,6 +200,19 @@ app.post('/api/getEvents', (req, res) => {
   )
 })
 
+
+
+app.post('/api/getSubscribedEvents', (req, res) => {
+console.log(req.body.event);
+  Event.find({_id: {$in: req.body.event}})
+  .exec()
+  .then(response =>{
+    console.log("this is response:", response);
+    res.send(response)}
+
+  )
+})
+
 app.post('/api/getInvites', (req, res) => {
   Event.find({invitedDoctors:req.body.docID })
   .exec()
@@ -212,6 +225,15 @@ app.post('/api/getInvites', (req, res) => {
 
 app.get('/api/getDoctors', (req, res) => {
   Doctor.find()
+  .exec()
+
+  .then(response =>
+    {res.send(response)}
+  )
+
+})
+app.get('/api/getGroups', (req, res) => {
+  Group.find()
   .exec()
 
   .then(response =>
@@ -233,13 +255,14 @@ app.post('/api/inviteDoctor', (req, res) => {
 })
 
 app.post('/api/acceptInvite', (req, res) => {
-
+console.log(req.body.event)
   Doctor.findOne({_id: req.body.doctorID}, function(err, doctor) {
     doctor.subscribedEvents = doctor.subscribedEvents.concat(req.body.event)
     doctor.save(function(err) {
       if (err) {
         res.send("Error didn't save updated event")
       }
+      res.send(doctor)
     })
   })
 })

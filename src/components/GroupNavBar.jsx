@@ -17,7 +17,7 @@ class GroupNavBar extends Component {
 
   }
 
-  
+
 
 
   render() {
@@ -34,6 +34,7 @@ class GroupNavBar extends Component {
 
             <Button onClick={() => this.props.navToPage('createEventPage')}>Create Event</Button><br/>
             <Button onClick={() => this.props.navToPage('myEventsPage')}>See my Events</Button><br/>
+              <Button onClick={() => this.props.navToPage('inviteGroupsPage')}>Find groups to follow</Button><br/>
 
 
         <Button> Button3 </Button><br/>

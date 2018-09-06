@@ -34,21 +34,21 @@ class MyInvitesPage extends Component {
 
 handleAcceptInvite(event,invite) {
   event.preventDefault();
+  console.log("my invite:" , invite);
   let doctorID = this.props.userProfile._id;
   axios.post('/api/acceptInvite',
   {
     event: [invite],
     doctorID: doctorID,
   })
-  .then(()=> {
-
+  .then((response)=> {
+    console.log("doctor object updated: ", response)
   alert('invite accepted')
 })
 }
 
 
   render() {
-    console.log(this.state.inviteList);
 
     return (
       <div style={center}>

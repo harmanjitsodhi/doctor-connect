@@ -16,6 +16,19 @@ class DoctorNavBar extends Component {
     super(props);
 
   }
+  handleSeeEvents(event) {
+    let subbedEvents = this.props.userProfile.subscribedEvents;
+    event.preventDefault();
+    console.log("array of objects", subbedEvents);
+
+    axios.post('/api/getSubscribedEvents',
+    {event: subbedEvents}
+    )
+    .then((response) => {
+      console.log("event:" , response.data);
+
+    })
+  }
 
 
 
@@ -25,9 +38,10 @@ class DoctorNavBar extends Component {
       <div>
       <navbar style={naveBarStyle}>
         <h3>Welcome, {this.props.userProfile.name}!</h3>
-        
+
             <Button onClick={() => this.props.navToPage('doctorPortal')}>Home</Button><br/>
             <Button onClick={() => this.props.navToPage('myInvitesPage')}>See Invites</Button><br/>
+              <Button onClick={(event) => this.handleSeeEvents(event)}>See Upcoming Events</Button><br/>
             <Button onClick={() => this.props.navToPage('')}>Logout</Button><br/>
 
         <Button> Button3 </Button><br/>

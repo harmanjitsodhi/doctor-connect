@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import {navPage} from '../js/actions/index';
 import axios from "axios";
 import {filterByList} from '../specialtiesSRC';
+import GroupNavBar from './GroupNavBar';
 
 
 
@@ -83,8 +84,9 @@ console.log("this event" , this.props.event);
 
 
     return (
-      <div>
+      <div style={center}>
         In my invite doctors page!
+        <GroupNavBar/>
 
         <form autoComplete="off">
 
@@ -148,6 +150,14 @@ const mapDispatchToProps = (dispatch) => {
    },
 
  }
+}
+const center = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+
+  width: "100%",
+  height: "100%",
 }
 
 InviteDoctorPage = connect(mapStateToProps, mapDispatchToProps)(InviteDoctorPage);

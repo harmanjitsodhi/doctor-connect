@@ -12,6 +12,7 @@ import PatientRegistrationForm from './components/PatientRegistrationForm';
 import DoctorPortal from './components/DoctorPortal';
 import CreateEventPage from './components/CreateEventPage';
 import InviteDoctorPage from './components/InviteDoctorPage';
+import InviteGroupsPage from './components/InviteGroupsPage';
 import MyEventsPage from './components/MyEventsPage';
 import MyInvitesPage from './components/MyInvitesPage';
 import GroupPortal from './components/GroupPortal';
@@ -43,6 +44,7 @@ render() {
       else if(this.props.mode === "inviteDoctorPage") page = <InviteDoctorPage app={this}/>
         else if(this.props.mode === "myInvitesPage") page = <MyInvitesPage app={this}/>
       else if(this.props.mode === "patient") page = <PatientRegistrationForm app={this}/>
+      else if(this.props.mode === "inviteGroupsPage") page = <InviteGroupsPage app={this}/>
       else if(this.props.mode === "doctorPortal") page = <DoctorPortal app={this}/>
       else if(this.props.mode === "groupPortal") page = <GroupPortal app={this}/>
       // else if(this.state.mode === "newQuiz") screen = <NewQuiz app={this}/>
