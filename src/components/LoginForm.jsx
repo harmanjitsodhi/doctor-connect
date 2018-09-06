@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import axios from "axios";
+import Paper from '@material-ui/core/Paper';
 import {navPage} from '../js/actions/index';
 
 class LoginForm extends Component {
@@ -19,7 +20,7 @@ class LoginForm extends Component {
     event.preventDefault();
     axios.post('/api/login', {username, password})
     .then((response) => {
-      
+
       this.props.setProfile(response.data.profile)
 
       if (response.data.userType === 'doctor') {
@@ -35,6 +36,7 @@ class LoginForm extends Component {
 
   render() {
     return (
+      <Paper>
       <div >
           <TextField type="text" label="Username" value={this.state.username}
             onChange={(e) => this.setState({username: e.target.value})} />
@@ -45,6 +47,7 @@ class LoginForm extends Component {
           <Button onClick={(event) => this.handleLogin(event, this.state.username, this.state.password)}>Login</Button><br/>
           <Button onClick={() => this.props.navToPage('registration')}>Don't have an account yet?</Button><br/>
       </div>
+    </Paper>
     );
   }
 }
