@@ -17,8 +17,8 @@ const rootReducer = (state = initialState, action) => {
       return {...state, userId: action.userId};
     case "SET_PROFILE":
       return {...state, userProfile: action.profile};
-      case "SET_EVENT":
-        return {...state, event: action.event};
+    case "SET_EVENT":
+      return {...state, event: action.event};
     default:
       return state;
   }

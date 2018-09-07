@@ -32,15 +32,11 @@ class MyEventsPage extends Component {
   };
 
       handleInviteDoctor(event, myEvent) {
-        event.preventDefault();
-
-          this.props.setEvent(myEvent);
+          event.preventDefault();
 
 
-
-
-          this.props.navToPage('inviteDoctorPage');
-
+          this.props.setEvent(myEvent)
+          setTimeout(this.props.navToPage('inviteDoctorPage'), 0)
       }
 
 
@@ -50,7 +46,6 @@ class MyEventsPage extends Component {
       <div style={center}>
           <GroupNavBar/>
         In my events listed page!
-
       <div>
         {this.state.eventsList.map(myEvent =>
           <div>

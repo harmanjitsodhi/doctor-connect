@@ -21,12 +21,19 @@ class MyInvitesPage extends Component {
   }
 
   componentDidMount() {
+
     axios.post('/api/getInvites',
     {docID: this.props.userProfile._id,
 
     })
     .then((response) =>  {
       response.data.map(invite => {
+        for (var i = 0; i < this.props.userProfile.subscribedEvents.length; i++) {
+
+          if (this.props.userProfile.subscribedEvents[i] == invite._id) {
+            return
+          }
+        }
         this.setState({inviteList: [...this.state.inviteList, invite]})
       })
     })
@@ -34,7 +41,7 @@ class MyInvitesPage extends Component {
 
 handleAcceptInvite(event,invite) {
   event.preventDefault();
-  console.log("my invite:" , invite);
+
   let doctorID = this.props.userProfile._id;
   axios.post('/api/acceptInvite',
   {
@@ -44,6 +51,7 @@ handleAcceptInvite(event,invite) {
   .then((response)=> {
     console.log("doctor object updated: ", response)
   alert('invite accepted')
+  this.props.navToPage('myInvitesPage')
 })
 }
 

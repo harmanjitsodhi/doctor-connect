@@ -42,8 +42,6 @@ handleCompleteGroupProfile(event, user, name, about, email, isGroup, interest) {
   event.preventDefault();
 
 
-
-
   axios.post('/api/addGroup',
   {user: this.props.userId,
     name: this.state.orgName,

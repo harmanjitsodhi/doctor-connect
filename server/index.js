@@ -106,7 +106,8 @@ app.post('/api/addGroup', function(req,res) {
     name: req.body.name,
     about: req.body.about,
     email: req.body.email,
-    isGroup: req.body.isGroup
+    isGroup: req.body.isGroup,
+    interest: req.body.interest
   })
 
   newGroup.save()
@@ -218,9 +219,6 @@ app.post('/api/getInvites', (req, res) => {
   .exec()
   .then(response =>
    {res.send(response)})
-
-
-
 })
 
 app.get('/api/getDoctors', (req, res) => {
@@ -245,10 +243,26 @@ app.get('/api/getGroups', (req, res) => {
 app.post('/api/inviteDoctor', (req, res) => {
 
   Event.findOne({_id: req.body._id}, function(err, event) {
-    event.invitedDoctors = event.invitedDoctors.concat(req.body.invitedDoctorId)
+    event.invitedDoctors = event.invitedDoctors.concat([req.body.invitedDoctorId])
     event.save(function(err) {
       if (err) {
         res.send("Error didn't save updated event")
+      }
+    })
+  })
+})
+
+app.post('/api/followGroup', (req, res) => {
+  console.log("user id", req.body.userId)
+  console.log("group id", req.body.groupId)
+  Group.findOne({_id: req.body.userId}, function (err, group) {
+    console.log("current group", group)
+    group.following = group.following.concat(req.body.groupId)
+    group.save(function(err) {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(group)
       }
     })
   })

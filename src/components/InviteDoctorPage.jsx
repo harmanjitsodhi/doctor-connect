@@ -21,9 +21,7 @@ class InviteDoctorPage extends Component {
     super(props);
     this.state = {
       doctorsList: [],
-
       filterObject: '',
-
     }
   }
   componentDidMount() {
@@ -31,9 +29,12 @@ class InviteDoctorPage extends Component {
     axios.get('/api/getDoctors')
 
     .then((response) =>  {
-
-
       response.data.map(doctor => {
+        for (let i = 0; i < this.props.event.invitedDoctors.length; i++) {
+          if (this.props.event.invitedDoctors[i] == doctor._id) {
+            return
+          }
+        }
         this.setState({doctorsList: [...this.state.doctorsList, doctor]})
       })
     })
@@ -46,10 +47,11 @@ class InviteDoctorPage extends Component {
       _id: eventID,
       invitedDoctorId: [id],
     })
-    .then(()=> {
-  console.log('invite sent!')})
-
-  };
+    .then(
+                this.props.navToPage('myEventsPage')
+    
+          )
+        };
 
 
   handleChange = event => {
@@ -79,10 +81,6 @@ class InviteDoctorPage extends Component {
 
 
   render() {
-
-console.log("this event" , this.props.event);
-
-
     return (
       <div style={center}>
         In my invite doctors page!

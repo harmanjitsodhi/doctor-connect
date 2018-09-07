@@ -30,7 +30,7 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  
+
   language: [{
     type: String,
     required: true
@@ -118,11 +118,29 @@ const eventSchema = new mongoose.Schema({
     },
 });
 
+const conversationSchema = new mongoose.Schema({
+  user1: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
+  user2: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
+  user1Msg: [{
+    type: String,
+  }],
+  user2Msg: [{
+    type: String,
+  }],
+});
+
 
 const User = mongoose.model('User', userSchema);
 const Doctor = mongoose.model('Doctor', doctorSchema);
 const Group = mongoose.model('Group', groupSchema);
 const Event = mongoose.model('Event', eventSchema);
+const Conversation = mongoose.model('Conversation', conversationSchema);
 
 
 module.exports = {User, Doctor, Group, Event};
